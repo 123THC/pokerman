@@ -4,7 +4,15 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   username: {type: String},
   email: {type: String},
-  password: {type: String, required: true } // the required is a validation
+  address: {
+    line1: { type: String},
+    line2: { type: String },
+    city: { type: String },
+    postcode: { type: String },
+    country: { type: String }
+  },
+  password: {type: String }, // the required is a validation
+  githubId: { type: Number }
 });
 
 // this is virtual as we dont want to save it on the database but we do want to save it temporarily so that we can check it against the password
