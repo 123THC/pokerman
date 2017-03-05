@@ -17,6 +17,7 @@ router.route('/games/new')
 router.route('/games/:id/attend')
   .get(games.show)
   .put(games.update)
+  .post(games.createComment)
   .delete(secureRoute, games.delete);
 
 router.route('/profile')

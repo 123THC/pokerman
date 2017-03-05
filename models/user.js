@@ -11,8 +11,10 @@ const userSchema = new mongoose.Schema({
     postcode: { type: String },
     country: { type: String }
   },
+  image: { type: String, required: true },
   password: {type: String }, // the required is a validation
-  githubId: { type: Number }
+  githubId: { type: Number },
+  attending: []
 });
 
 // this is virtual as we dont want to save it on the database but we do want to save it temporarily so that we can check it against the password

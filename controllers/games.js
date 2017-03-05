@@ -93,7 +93,7 @@ function createCommentRoute(req, res, next) {
       game.comments.push(req.body); // create an embedded record
       return game.save();
     })
-    .then((game) => res.redirect(`/games/${game.id}`))
+    .then((game) => res.redirect(`/games/${game.id}/attend`))
     .catch(next);
 }
 
@@ -109,7 +109,7 @@ function deleteCommentRoute(req, res, next) {
 
     return game.save();
   })
-  .then((game) => res.redirect(`/games/${game.id}`))
+  .then((game) => res.redirect(`/games/${game.id}/attend`))
   .catch(next);
 }
 

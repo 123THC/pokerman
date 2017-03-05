@@ -38,6 +38,14 @@
     <input type="datetime-local" name="date" id="date">
   </div>
   <div>
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address" value="<%= user.address.line1 %>" disabled="true">
+  </div>
+  <div>
+    <label for="postcode">Post Code</label>
+    <input type="text" name="postcode" id="postcode" value="<%= user.address.postcode %>" disabled="true">
+  </div>
+  <div>
     <label for="description">Additional Information</label>
     <textarea name="description" id="description" maxlength="255"></textarea>
   </div>

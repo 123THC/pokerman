@@ -2,7 +2,7 @@
 
 <% games.forEach((game) => { %>
   <div>
-    <a href="/games/<%= game.id %>/attend">Put Username in here</a>
+    <a href="/games/<%= game.id %>/attend"><%= game.createdBy %></a>
       <h2>Buy in: £<%= game.buyIn %></h2>
       <h2>Number of Players: <%= game.players %></h2>
       <h2>When: <%= game.date %></h2>

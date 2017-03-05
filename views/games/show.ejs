@@ -11,15 +11,27 @@
       <h2>Seats Remaining: <%= game.players %></h2>
       <h2>More Info: <%= game.description %></h2>
 
-      <button class="button">Attend</button>
+    <a href="/"><button class="button">Reserve Your Seat</button></a>
   </div>
+  <section>
+    <form method="POST" action="/games/<%= game.id %>/attend">
+      <textarea name="content" id="content" placeholder="Ask any questions here"></textarea>
+      <button class="button">Ask a Question</button>
+    </form>
+  </section>
+  <section>
+  <h4>Previous Questions</h4>
+  <% game.comments.forEach((comment) => { %>
+    <p><%= comment.content %></p>
+    <small><%= comment.createdBy.username %></small>
 
-  <% if(locals.isAuthenticated) { %>
-    <section>
-      <form method="POST" action="/games/<%= game.id %>/attend">
-        <textarea name="question" id="question" placeholder="Ask any questions here"></textarea>
-        <button class="button">Ask a Question</button>
-      </form>
-    </section>
-  <% } %>
+    <% if (locals.isAuthenticated && comment.ownedBy(user)) { %>
+
+    <form method="POST" action="/games/<%= game.id %>/attend">
+      <input type="hidden" name="_method" value="DELETE">
+      <button>Delete</button>
+    </form>
+    <% } %>
+  <% }) %>
+</section>
 </div>
