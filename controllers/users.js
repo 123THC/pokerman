@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Game = require('../models/game');
+const Promise = require('bluebird');
 
 function indexRoute(req, res, next) {
   User
@@ -13,15 +15,15 @@ function newRoute(req, res) {
 }
 
 function showRoute(req, res, next) {
-  User
-    .findById(req.params.id)
-    .populate('comments.createdBy')
-    .exec()
-    .then((user) => {
-      if(!user) return res.notFound();
-      return res.render('users/show', { user });
-    })
-    .catch(next);
+
+  Promise.props({
+    user: User.findById(req.params.id).populate('comments.createdBy').exec(),
+    games: Game.find({ going: req.params.id }).exec()
+  })
+  .then((result) => {
+    return res.render('users/show', result);
+  })
+  .catch(next);
 }
 
 function editRoute(req, res, next) {
@@ -66,30 +68,11 @@ function deleteRoute(req, res, next) {
     .catch(next);
 }
 
-function createAttendingRoute(req, res, next) {
-
-  User
-    .findById(req.params.id)
-    .exec()
-    .then((user) => {
-      if(!user) return res.notFound();
-
-      user.alreadyAttending.push(res.game);
-      return user.save();
-    })
-    .then((user) => res.redirect(`/users/${user.id}`))
-    .catch((err) => {
-      console.log(err);
-      next(err);
-    });
-}
-
 module.exports = {
   index: indexRoute,
   new: newRoute,
   show: showRoute,
   edit: editRoute,
   update: updateRoute,
-  delete: deleteRoute,
-  attend: createAttendingRoute
+  delete: deleteRoute
 };

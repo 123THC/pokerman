@@ -15,9 +15,6 @@ router.route('/users')
 router.route('/users/:id')
   .get(users.show);
 
-router.route('/users/:id/attend')
-  .post(users.attend);
-
 router.route('/games')
   .get(games.index)
   .post(games.create);

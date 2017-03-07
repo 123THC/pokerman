@@ -4,6 +4,11 @@
 
   <%= user %>
 
+  <h2>Attending</h2>
+  <% games.forEach((game) => { %>
+    <p><%= game.description %></p>
+  <% }) %>
+
   <form method="POST" action="/profile">
     <input type="hidden" name="_method" value="DELETE">
     <button>Delete Account</button>

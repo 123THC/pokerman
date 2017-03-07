@@ -8,20 +8,10 @@
   </div>
 </div>
 
-  <h2><%= game.createdBy %></h2>
-  <h2><%= currentUser._id %></h2>
-
-<% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser)) { %>
+<% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser) && game.createdBy.toString() !== currentUser.id) { %>
   <form method="POST" action="/games/<%= game.id %>/attend">
     <input type="hidden" name="_method" value="<%= currentUser.username %>">
     <button class="button attend">Attend</button>
-  </form>
-<% } %>
-
-<% if(locals.isAuthenticated && game.userIsAttending(currentUser)) { %>
-  <form method="POST" action="/users/<%= currentUser._id %>/attend">
-    <input type="hidden" name="_method" value="<%= currentUser.username %>">
-    <button class="button attend">Create Reminder</button>
   </form>
 <% } %>
 
@@ -64,5 +54,3 @@
     <% } %>
   <% }) %>
 </section>
-
-<%#  && Object.is(game.createdBy, currentUser._id) %>

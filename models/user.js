@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
   lat: { type: Number },
   lng: { type: Number },
   image: { type: String },
-  alreadyAttending: [{ type: mongoose.Schema.ObjectId, ref: 'Game' }],
   password: {type: String }, // the required is a validation
   githubId: { type: Number }
 });
@@ -43,12 +42,6 @@ userSchema.pre('validate', function checkPassword(next) {
   if(this.isModified('password') && this._passwordConfirmation !== this.password) this.invalidate('passwordConfirmation', 'does not match');
   next();
 });
-
-userSchema.methods.attending = function attending(user) {
-  return this.alreadyAttending.includes(user._id) || this.alreadyAttending.filter((alreadyAttending) => {
-    return alreadyAttending.id === user.id;
-  }).length > 0;
-};
 
 userSchema.pre('remove', function removeImage (next) {
   s3.deleteObject({ Key: this.image }, next);
