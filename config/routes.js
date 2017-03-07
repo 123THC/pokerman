@@ -4,9 +4,16 @@ const sessions = require('../controllers/sessions');
 const secureRoute = require('../lib/secureRoute'); // make sure use later
 const oauth = require('../controllers/oauth');
 const games = require('../controllers/games');
+const users = require('../controllers/users');
 const upload = require('../lib/upload');
 
 router.get('/', (req, res) => res.render('statics/index'));
+
+router.route('/users')
+  .get(users.index);
+
+router.route('/users/:id')
+  .get(users.show);
 
 router.route('/games')
   .get(games.index)
@@ -25,9 +32,6 @@ router.route('/games/:id/attend')
 
 router.route('/games/:id/commments')
   .post(games.createComment);
-
-router.route('/profile')
-  .get(secureRoute, registrations.show);
 
 router.route('/register')
   .get(registrations.new)

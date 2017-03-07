@@ -1,8 +1,8 @@
 <div>
-  <img src="<%= currentUser.imageSRC %>" alt="<%= currentUser.username %>">
-  <h1><%= currentUser.username %></h1>
+  <img src="<%= user.imageSRC %>" alt="<%= user.username %>">
+  <h1><%= user.username %></h1>
 
-  <%= currentUser %>
+  <%= user %>
 
   <form method="POST" action="/profile">
     <input type="hidden" name="_method" value="DELETE">

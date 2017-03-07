@@ -1,6 +1,6 @@
 <%# Use google maps to show location of game %>
 <div>
-  <div class="">
+  <div>
     <h2>Buy in: £<%= game.buyIn %></h2>
     <h2>Number of Players: <%= game.players %></h2>
     <h2>When: <%= game.date %></h2>
@@ -8,12 +8,16 @@
     <h2>More Info: <%= game.description %></h2>
   </div>
 
-  <% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(user)) { %>
+  <h2><%= game.createdBy %></h2>
+  <h2><%= currentUser._id %></h2>
+
+  <% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser) && Object.is(game.createdBy, currentUser._id)) { %>
     <form method="POST" action="/games/<%= game.id %>/attend">
-      <input type="hidden" name="_method" value="<%= user.username %>">
+      <input type="hidden" name="_method" value="<%= currentUser.username %>">
       <button class="button">Attend</button>
     </form>
   <% } %>
+
 </div>
 <section id="location">
   <div class="row">
@@ -26,7 +30,7 @@
 <section>
   <h4>Already Attending</h4>
   <% game.going.forEach((going) => { %>
-    <small><%= going.username %></small>
+    <a href="/users/<%= going.id %>"><%= going.username %></a>
   <% }) %>
 </section>
 <section>
@@ -41,7 +45,7 @@
     <p><%= comment.content %></p>
     <small><%= comment.createdBy.username %></small>
 
-    <% if (locals.isAuthenticated && comment.ownedBy(user)) { %>
+    <% if (locals.isAuthenticated && comment.ownedBy(currentUser)) { %>
 
     <form method="POST" action="/games/<%= game.id %>/comments/<%= comment.id %>">
       <input type="hidden" name="_method" value="DELETE">

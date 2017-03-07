@@ -44,7 +44,7 @@ function github(req, res, next) {
     req.session.isAuthenticated = true;
 
     req.flash('info', `Welcome back ${user.username}!`);
-    res.redirect('/profile');
+    res.redirect(`/users/${user.id}`);
   })
   .catch(next);
 }

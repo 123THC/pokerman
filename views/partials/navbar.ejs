@@ -12,13 +12,13 @@
           <a class="nav-link" href="/games">Current Games</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="users/:id/attending">Attending</a>
+          <a class="nav-link" href="users/<%= currentUser.id %>/attending">Attending</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="games/new">Host</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/profile">My Profile</a>
+          <a class="nav-link" href="/users/<%= currentUser.id %>">My Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>

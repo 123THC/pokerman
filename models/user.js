@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const s3 = require('../lib/s3');
-// const geocoder = require('geocoder');
+const geocoder = require('geocoder');
+
 
 const userSchema = new mongoose.Schema({
   username: {type: String, unique: true},
@@ -13,6 +14,8 @@ const userSchema = new mongoose.Schema({
     postcode: { type: String },
     country: { type: String }
   },
+  lat: { type: Number },
+  lng: { type: Number },
   image: { type: String },
   password: {type: String }, // the required is a validation
   githubId: { type: Number }
@@ -42,11 +45,13 @@ userSchema.pre('validate', function checkPassword(next) {
   next();
 });
 
+
 // userSchema.pre('save', function geocode(next) {
-//   var latLng = geocoder.geocode( this.address.postcode, function ( err, data ) {
-//     return data;
+//   geocoder.geocode( this.address.postcode, function ( err, data ) {
+//     this.lat = data.results[0].geometry.location.lat;
+//     this.lng = data.results[0].geometry.location.lng;
+//     console.log(this);
 //   });
-//   this.lat = latLng;
 //   next();
 // });
 

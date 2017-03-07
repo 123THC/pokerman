@@ -45,12 +45,16 @@ User
         buyIn: 25,
         players: 6,
         date: '2016-03-20',
+        latitude: 51.470327,
+        longitude: -0.061524,
         description: 'Lots of beers will be provided',
         createdBy: users[0]
       }, {
         buyIn: 20,
         players: 4,
         date: '2016-03-21',
+        latitude: 51.433464,
+        longitude: -0.166956,
         description: 'Lots of cheese will be provided',
         createdBy: users[0]
       }]);

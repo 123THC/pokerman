@@ -1,51 +1,53 @@
 /* global google:true */
 
-const $reserve = $('.reserve');
-
-
 $(()=>{
 
-  initMap();
-  
-  function initMap() {
-    const lat = 51.515209;
-    const lng = -0.072132;
+  if ($('#map').length) initSingleMap();
+
+  function initSingleMap() {
+    const lat = $('#map').data('lat');
+    const lng = $('#map').data('lng');
     const latLng = { lat, lng };
 
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+    const map = new google.maps.Map($('#map').get(0), {
+      zoom: 14, //this is out of 20
       center: latLng,
       scrollwheel: false
     });
 
-    $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${user.address.line1}+${ user.address.city}+${user.address.postcode}&key=AIzaSyDOJ2tNdb1wTDfSamg1xj7vWR_w8SiLGsc`)
-    .done((data)=>{
-      const position = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+    new google.maps.Marker({
+      position: latLng,
+      map
+    });
+  }
+
+  function initMap() {
+
+    const $maps = $('.indexMap');
+
+    $.each($maps, (index, element) => {
+
+      const mapDiv = $(element);
+      const lat = mapDiv.data('lat');
+      const lng = mapDiv.data('lng');
+      const latLng = { lat, lng };
+
+      const map = new google.maps.Map(mapDiv.get(0), {
+        zoom: 14, //this is out of 20
+        center: latLng,
+        scrollwheel: false
+      });
 
       new google.maps.Marker({
-        position,
+        position: latLng,
         map
       });
+
     });
 
-  }
-
-  const seatsRemaining = $('.seatsRemaining');
-  let seatsAvailable = +seatsRemaining.html();
-  function reserveSeat(e) {
-    e.preventDefault;
-    // take 1 from the seats available
-    // push the game details into the array of games attending for the user
-    // change the reserve a seat button to be disabled for that user and innerHTML to be RESERVED
-
-    seatsAvailable--;
-    console.log(seatsAvailable);
-    console.log(seatsRemaining.html());
-    return seatsRemaining.html(seatsAvailable);
 
   }
 
-  $reserve.on('click', reserveSeat);
-
+  initMap();
 
 });

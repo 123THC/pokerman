@@ -2,48 +2,50 @@
 
 /* global google:true */
 
-var $reserve = $('.reserve');
-
 $(function () {
 
-  // initMap();
-  //
-  // function initMap() {
-  //   const lat = 51.515209;
-  //   const lng = -0.072132;
-  //   const latLng = { lat, lng };
-  //
-  //   const map = new google.maps.Map(document.getElementById('map'), {
-  //     zoom: 12,
-  //     center: latLng,
-  //     scrollwheel: false
-  //   });
-  //
-  //   $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${user.address.line1}+${ user.address.city}+${user.address.postcode}&key=AIzaSyDOJ2tNdb1wTDfSamg1xj7vWR_w8SiLGsc`)
-  //   .done((data)=>{
-  //     const position = {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
-  //
-  //     new google.maps.Marker({
-  //       position,
-  //       map
-  //     });
-  //   });
-  //
-  // }
+  if ($('#map').length) initSingleMap();
 
-  var seatsRemaining = $('.seatsRemaining');
-  var seatsAvailable = +seatsRemaining.html();
-  function reserveSeat(e) {
-    e.preventDefault;
-    // take 1 from the seats available
-    // push the game details into the array of games attending for the user
-    // change the reserve a seat button to be disabled for that user and innerHTML to be RESERVED
+  function initSingleMap() {
+    var lat = $('#map').data('lat');
+    var lng = $('#map').data('lng');
+    var latLng = { lat: lat, lng: lng };
 
-    seatsAvailable--;
-    console.log(seatsAvailable);
-    console.log(seatsRemaining.html());
-    return seatsRemaining.html(seatsAvailable);
+    var map = new google.maps.Map($('#map').get(0), {
+      zoom: 14, //this is out of 20
+      center: latLng,
+      scrollwheel: false
+    });
+
+    new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
   }
 
-  $reserve.on('click', reserveSeat);
+  function initMap() {
+
+    var $maps = $('.indexMap');
+
+    $.each($maps, function (index, element) {
+
+      var mapDiv = $(element);
+      var lat = mapDiv.data('lat');
+      var lng = mapDiv.data('lng');
+      var latLng = { lat: lat, lng: lng };
+
+      var map = new google.maps.Map(mapDiv.get(0), {
+        zoom: 14, //this is out of 20
+        center: latLng,
+        scrollwheel: false
+      });
+
+      new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+    });
+  }
+
+  initMap();
 });

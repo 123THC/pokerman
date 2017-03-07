@@ -1,32 +1,6 @@
 <form method="POST" action="/games">
-
-<%# make this so it takes the users address instead of having to re-type %>
-
-  <%# <fieldset>%>
-    <%# <legend>Address</legend>
-    <div>
-      <label for="line1">Line 1</label>
-      <input type="text" name="address[line1]" id="line1">
-    </div>
-    <div>
-      <label for="line2">Line 2</label>
-      <input type="text" name="address[line2]" id="line2">
-    </div>
-    <div>
-      <label for="city">City</label>
-      <input type="text" name="address[city]" id="city">
-    </div>
-    <div>
-      <label for="postcode">Postcode</label>
-      <input type="text" name="address[postcode]" id="postcode">
-    </div>
-    <div>
-      <label for="country">Country</label>
-      <input type="text" name="address[country]" id="country">
-    </div>
-  </fieldset>%>
   <div>
-    <label for="player">Number of players</label>
+    <label for="players">Number of players</label>
     <input type="number" name="players" id="players">
   </div>
   <div>
@@ -38,12 +12,10 @@
     <input type="datetime-local" name="date" id="date">
   </div>
   <div>
-    <label for="address">Address</label>
-    <input type="text" name="address" id="address" value="<%= user.address.line1 %>" disabled="true">
+    <input type= "hidden" type="number" name="longitude" id="longitude" value="<%= currentUser.lng %>">
   </div>
   <div>
-    <label for="postcode">Post Code</label>
-    <input type="text" name="postcode" id="postcode" value="<%= user.address.postcode %>" disabled="true">
+    <input type= "hidden" type="number" name="latitude" id="latitude" value="<%= currentUser.lat %>">
   </div>
   <div>
     <label for="description">Additional Information</label>

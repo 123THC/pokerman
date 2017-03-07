@@ -12,10 +12,11 @@ commentSchema.methods.ownedBy = function ownedBy(user) {
 };
 
 const gameSchema = new mongoose.Schema({
-  // address: { user.id.address }, // fix this on Monday
   buyIn: { type: String, required: true },
   players: { type: Number, required: true },
   date: { type: Date, required: true },
+  longitude: { type: Number, required: true },
+  latitude: { type: Number, required: true },
   description: { type: String, required: true },
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User'},
   comments: [ commentSchema ],
@@ -31,5 +32,6 @@ gameSchema.methods.userIsAttending = function userIsAttending(user) {
     return going.id === user.id;
   }).length > 0;
 };
+
 
 module.exports = mongoose.model('Game', gameSchema);
