@@ -1,5 +1,26 @@
 @import "bootstrap/bootstrap-grid";
 
-a.nav-link {
-  list-style-type: none;
+#homePage {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/images/poker.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  h1 {
+   font-size: 50px;
+   position: absolute;
+   top: 45%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: $white;
+ }
+}
+
+#map {
+  height: 300px;
+  background-color: yellow;
+}
+
+ul {
+  list-style: none;
 }

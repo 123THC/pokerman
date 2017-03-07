@@ -5,10 +5,13 @@ function newRoute(req, res) {
 }
 
 function createRoute(req, res, next) {
-
+  if(req.file) req.body.image = req.file.key;
   User
     .create(req.body)
-    .then(() => res.redirect('/login'))
+    .then((user) => {
+      req.flash('success', `Thanks for registering, ${user.username}!`);
+      res.redirect('/login');
+    })
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest('/register', err.toString());
       next(err);

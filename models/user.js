@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const s3 = require('../lib/s3');
+// const geocoder = require('geocoder');
 
 const userSchema = new mongoose.Schema({
-  username: {type: String},
+  username: {type: String, unique: true},
   email: {type: String},
   address: {
     line1: { type: String},
@@ -11,11 +13,17 @@ const userSchema = new mongoose.Schema({
     postcode: { type: String },
     country: { type: String }
   },
-  image: { type: String, required: true },
+  image: { type: String },
   password: {type: String }, // the required is a validation
-  githubId: { type: Number },
-  attending: []
+  githubId: { type: Number }
 });
+
+userSchema
+  .virtual('imageSRC')
+  .get(function getImageSRC() {
+    if(!this.image) return 'http://euniv.shooliniuniversity.com/erp/required/images/mprofile.png';
+    return `https://s3-eu-west-1.amazonaws.com/wdi-ldn-express-project2/${this.image}`;
+  });
 
 // this is virtual as we dont want to save it on the database but we do want to save it temporarily so that we can check it against the password
 userSchema
@@ -32,6 +40,18 @@ userSchema.pre('validate', function checkPassword(next) {
   }
   if(this.isModified('password') && this._passwordConfirmation !== this.password) this.invalidate('passwordConfirmation', 'does not match');
   next();
+});
+
+// userSchema.pre('save', function geocode(next) {
+//   var latLng = geocoder.geocode( this.address.postcode, function ( err, data ) {
+//     return data;
+//   });
+//   this.lat = latLng;
+//   next();
+// });
+
+userSchema.pre('remove', function removeImage (next) {
+  s3.deleteObject({ Key: this.image }, next);
 });
 
 userSchema.pre('save', function hashPassword(next) {

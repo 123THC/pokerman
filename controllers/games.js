@@ -29,7 +29,7 @@ function createRoute(req, res, next) {
 function showRoute(req, res, next) {
   Game
     .findById(req.params.id)
-    .populate('comments.createdBy')
+    .populate('comments.createdBy going')
     .exec()
     .then((game) => {
       if(!game) return res.notFound();
@@ -93,7 +93,7 @@ function createCommentRoute(req, res, next) {
       game.comments.push(req.body); // create an embedded record
       return game.save();
     })
-    .then((game) => res.redirect(`/games/${game.id}/attend`))
+    .then((game) => res.redirect(`/games/${game.id}`))
     .catch(next);
 }
 
@@ -109,8 +109,28 @@ function deleteCommentRoute(req, res, next) {
 
     return game.save();
   })
-  .then((game) => res.redirect(`/games/${game.id}/attend`))
+  .then((game) => res.redirect(`/games/${game.id}`))
   .catch(next);
+}
+
+function createGoingRoute(req, res, next) {
+
+  Game
+    .findById(req.params.id)
+    .exec()
+    .then((game) => {
+      if(!game) return res.notFound();
+      if(game.going.length === game.players) res.badRequest(`/games/${game.id}`, 'Game is already full');
+      if(game.userIsAttending(req.user)) res.badRequest(`/games/${game.id}`, 'You\'re already going you muppet');
+
+      game.going.push(req.user);
+      return game.save();
+    })
+    .then((game) => res.redirect(`/games/${game.id}`))
+    .catch((err) => {
+      console.log(err);
+      next(err);
+    });
 }
 
 module.exports = {
@@ -122,5 +142,6 @@ module.exports = {
   update: updateRoute,
   delete: deleteRoute,
   createComment: createCommentRoute,
-  deleteComment: deleteCommentRoute
+  deleteComment: deleteCommentRoute,
+  going: createGoingRoute
 };
