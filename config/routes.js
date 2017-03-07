@@ -15,6 +15,9 @@ router.route('/users')
 router.route('/users/:id')
   .get(users.show);
 
+router.route('/users/:id/attend')
+  .post(users.attend);
+
 router.route('/games')
   .get(games.index)
   .post(games.create);
@@ -32,6 +35,9 @@ router.route('/games/:id/attend')
 
 router.route('/games/:id/commments')
   .post(games.createComment);
+
+router.route('/games/:id/comments/:commentId')
+  .delete(games.deleteComment);
 
 router.route('/register')
   .get(registrations.new)

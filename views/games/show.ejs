@@ -1,44 +1,54 @@
-<%# Use google maps to show location of game %>
-<div>
-  <div>
+<div class="row">
+  <div class="col-lg-12">
     <h2>Buy in: £<%= game.buyIn %></h2>
     <h2>Number of Players: <%= game.players %></h2>
     <h2>When: <%= game.date %></h2>
     <h2>Seats Remaining: <%= game.seatsRemaining() %></h2>
     <h2>More Info: <%= game.description %></h2>
   </div>
+</div>
 
   <h2><%= game.createdBy %></h2>
   <h2><%= currentUser._id %></h2>
 
-  <% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser) && Object.is(game.createdBy, currentUser._id)) { %>
-    <form method="POST" action="/games/<%= game.id %>/attend">
-      <input type="hidden" name="_method" value="<%= currentUser.username %>">
-      <button class="button">Attend</button>
-    </form>
-  <% } %>
+<% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser)) { %>
+  <form method="POST" action="/games/<%= game.id %>/attend">
+    <input type="hidden" name="_method" value="<%= currentUser.username %>">
+    <button class="button attend">Attend</button>
+  </form>
+<% } %>
 
-</div>
+<% if(locals.isAuthenticated && game.userIsAttending(currentUser)) { %>
+  <form method="POST" action="/users/<%= currentUser._id %>/attend">
+    <input type="hidden" name="_method" value="<%= currentUser.username %>">
+    <button class="button attend">Create Reminder</button>
+  </form>
+<% } %>
+
 <section id="location">
   <div class="row">
-    <div class="col-lg-12">
-      <h3 class="offset-5">Location</h3>
+    <div class="col-lg-4 showMap">
       <div id="map" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
     </div>
   </div>
 </section>
+
 <section>
   <h4>Already Attending</h4>
   <% game.going.forEach((going) => { %>
     <a href="/users/<%= going.id %>"><%= going.username %></a>
   <% }) %>
 </section>
-<section>
-  <form method="POST" action="/games/<%= game.id %>/comments">
-    <textarea name="content" id="content" placeholder="Ask any questions here"></textarea>
-    <button class="button">Ask a Question</button>
-  </form>
-</section>
+
+<% if (locals.isAuthenticated ) { %>
+  <section>
+    <form method="POST" action="/games/<%= game.id %>/comments">
+      <textarea name="content" id="content" placeholder="Ask any questions here"></textarea>
+      <button class="button">Ask a Question</button>
+    </form>
+  </section>
+<% } %>
+
 <section>
   <h4>Previous Questions</h4>
   <% game.comments.forEach((comment) => { %>
@@ -49,8 +59,10 @@
 
     <form method="POST" action="/games/<%= game.id %>/comments/<%= comment.id %>">
       <input type="hidden" name="_method" value="DELETE">
-      <button>Delete</button>
+      <button>Delete Comment</button>
     </form>
     <% } %>
   <% }) %>
 </section>
+
+<%#  && Object.is(game.createdBy, currentUser._id) %>

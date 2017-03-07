@@ -19,7 +19,6 @@
     "express-ejs-layouts": "^2.2.0",
     "express-flash": "0.0.2",
     "express-session": "^1.15.1",
-    "geocoder": "^0.2.2",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.5",
     "morgan": "^1.8.1",

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const s3 = require('../lib/s3');
-const geocoder = require('geocoder');
-
 
 const userSchema = new mongoose.Schema({
   username: {type: String, unique: true},
@@ -17,6 +15,7 @@ const userSchema = new mongoose.Schema({
   lat: { type: Number },
   lng: { type: Number },
   image: { type: String },
+  alreadyAttending: [{ type: mongoose.Schema.ObjectId, ref: 'Game' }],
   password: {type: String }, // the required is a validation
   githubId: { type: Number }
 });
@@ -45,15 +44,11 @@ userSchema.pre('validate', function checkPassword(next) {
   next();
 });
 
-
-// userSchema.pre('save', function geocode(next) {
-//   geocoder.geocode( this.address.postcode, function ( err, data ) {
-//     this.lat = data.results[0].geometry.location.lat;
-//     this.lng = data.results[0].geometry.location.lng;
-//     console.log(this);
-//   });
-//   next();
-// });
+userSchema.methods.attending = function attending(user) {
+  return this.alreadyAttending.includes(user._id) || this.alreadyAttending.filter((alreadyAttending) => {
+    return alreadyAttending.id === user.id;
+  }).length > 0;
+};
 
 userSchema.pre('remove', function removeImage (next) {
   s3.deleteObject({ Key: this.image }, next);

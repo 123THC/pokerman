@@ -90,7 +90,7 @@ function createCommentRoute(req, res, next) {
     .then((game) => {
       if(!game) return res.notFound();
 
-      game.comments.push(req.body); // create an embedded record
+      game.comments.push(req.body);
       return game.save();
     })
     .then((game) => res.redirect(`/games/${game.id}`))

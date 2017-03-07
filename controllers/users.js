@@ -66,11 +66,30 @@ function deleteRoute(req, res, next) {
     .catch(next);
 }
 
+function createAttendingRoute(req, res, next) {
+
+  User
+    .findById(req.params.id)
+    .exec()
+    .then((user) => {
+      if(!user) return res.notFound();
+
+      user.alreadyAttending.push(res.game);
+      return user.save();
+    })
+    .then((user) => res.redirect(`/users/${user.id}`))
+    .catch((err) => {
+      console.log(err);
+      next(err);
+    });
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
   show: showRoute,
   edit: editRoute,
   update: updateRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  attend: createAttendingRoute
 };
