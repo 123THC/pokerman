@@ -19,22 +19,26 @@ User
       line2: 'South Norwood',
       city: 'London',
       postcode: 'SE25 6BY',
-      country: 'Engalnd'
+      country: 'England'
     },
-    image: 'src/assets/images/ben.png',
+    latitude: 51.403634,
+    longitude: -0.081172,
+    image: 'http://euniv.shooliniuniversity.com/erp/required/images/mprofile.png',
     password: 'password',
     passwordConfirmation: 'password'
   }, {
-    username: 'a',
+    username: 'PokerKing1985',
     email: 'a@a',
     address: {
-      line1: '64 Zoo Lane',
-      line2: 'Stockport',
-      city: 'Manchester',
+      line1: '15 Mallard Crescent',
+      line2: 'Poynton',
+      city: 'Cheshire East',
       postcode: 'SK12 1HT',
-      country: 'Engalnd'
+      country: 'England'
     },
-    image: 'src/assets/images/ben.png',
+    latitude: 53.348997,
+    longitude: -2.143133,
+    image: 'http://euniv.shooliniuniversity.com/erp/required/images/mprofile.png',
     password: 'a',
     passwordConfirmation: 'a'
   }])
@@ -42,21 +46,23 @@ User
     console.log(`${users.length} users created!`);
     return Game
       .create([{
-        buyIn: 25,
+        buyIn: 250,
         players: 6,
-        date: '2016-03-20',
-        latitude: 51.470327,
-        longitude: -0.061524,
-        description: 'Lots of beers will be provided',
+        date: '2017-03-20',
+        time: '18:00',
+        latitude: 51.403634,
+        longitude: -0.081172,
+        description: 'This is a high stakes game so lots of beers will be provided and my wife will be providing table service',
         createdBy: users[0]
       }, {
         buyIn: 20,
         players: 4,
-        date: '2016-03-21',
-        latitude: 51.433464,
-        longitude: -0.166956,
-        description: 'Lots of cheese will be provided',
-        createdBy: users[0]
+        date: '2017-03-21',
+        time: '20:00',
+        latitude: 53.348997,
+        longitude: -2.143133,
+        description: 'Lots of cheese strings will be provided, please bring your own drinks',
+        createdBy: users[1]
       }]);
   })
   .then((games) => {

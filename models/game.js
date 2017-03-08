@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
   content: { type: String, required: true },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  reply: { type: String }
 }, {
   timestamps: true
 });
@@ -15,6 +16,7 @@ const gameSchema = new mongoose.Schema({
   buyIn: { type: String, required: true },
   players: { type: Number, required: true },
   date: { type: Date, required: true },
+  time: { type: String },
   longitude: { type: Number, required: true },
   latitude: { type: Number, required: true },
   description: { type: String, required: true },

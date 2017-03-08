@@ -23,6 +23,7 @@ userSchema
   .virtual('imageSRC')
   .get(function getImageSRC() {
     if(!this.image) return 'http://euniv.shooliniuniversity.com/erp/required/images/mprofile.png';
+    if(this.image.match(/^http/)) return this.image;
     return `https://s3-eu-west-1.amazonaws.com/wdi-ldn-express-project2/${this.image}`;
   });
 
@@ -44,7 +45,11 @@ userSchema.pre('validate', function checkPassword(next) {
 });
 
 userSchema.pre('remove', function removeImage (next) {
-  s3.deleteObject({ Key: this.image }, next);
+  console.log(this.imageSRC);
+  if(this.imageSRC !== 'http://euniv.shooliniuniversity.com/erp/required/images/mprofile.png') {
+    return s3.deleteObject({ Key: this.image }, next);
+  }
+  next();
 });
 
 userSchema.pre('save', function hashPassword(next) {

@@ -2,15 +2,34 @@
   <img src="<%= user.imageSRC %>" alt="<%= user.username %>">
   <h1><%= user.username %></h1>
 
-  <%= user %>
+  <% if( currentUser.id === user.id) { %>
+    <a href="/users/<%= user.id %>/edit" class="btn btn-primary">Edit Account</a>
+  <% } %>
 
   <h2>Attending</h2>
   <% games.forEach((game) => { %>
-    <p><%= game.description %></p>
+    <div class="profileDisplay"><a href="/games/<%= game.id %>"<p>Buy In: £<%= game.buyIn %></p>
+    <p>Description: <%= game.description %></p>
+    <p>On: <%= game.date %> at: <%= game.time %></p>
+    <section id="location">
+      <div class="indexMap profileDisplay" data-id="<%= game.id %>" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
+    </section></a></div>
   <% }) %>
 
-  <form method="POST" action="/profile">
+  <h2>Hosting</h2>
+  <% hosting.forEach((game) => { %>
+    <div class="profileDisplay"><a href="/games/<%= game.id %>"<p>Buy In: £<%= game.buyIn %></p>
+    <p>Description: <%= game.description %></p>
+    <p>On: <%= game.date %> at: <%= game.time %></p>
+    <section id="location">
+      <div class="indexMap profileDisplay" data-id="<%= game.id %>" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
+    </section></a></div>
+  <% }) %>
+
+  <% if( currentUser.id === user.id) { %>
+  <form method="POST" action="/users/<%= user.id %>">
     <input type="hidden" name="_method" value="DELETE">
-    <button>Delete Account</button>
+    <button class="btn btn-danger">Delete Account</button>
   </form>
+  <% } %>
 </div>

@@ -8,11 +8,19 @@
   </div>
 </div>
 
-<% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser) && game.createdBy.toString() !== currentUser.id) { %>
+<% if(locals.isAuthenticated && game.seatsRemaining() > 0 && !game.userIsAttending(currentUser) && game.createdBy.id !== currentUser.id) { %>
   <form method="POST" action="/games/<%= game.id %>/attend">
     <input type="hidden" name="_method" value="<%= currentUser.username %>">
-    <button class="button attend">Attend</button>
+    <button class="btn btn-success attend">Attend</button>
   </form>
+<% } %>
+
+<% if (game.createdBy.id === currentUser.id) { %>
+
+<form method="POST" action="/games/<%= game.id %>/delete">
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-danger">Delete Game</button>
+</form>
 <% } %>
 
 <section id="location">
@@ -26,11 +34,11 @@
 <section>
   <h4>Already Attending</h4>
   <% game.going.forEach((going) => { %>
-    <a href="/users/<%= going.id %>"><%= going.username %></a>
+    <a class="btn btn-info" href="/users/<%= going.id %>"><%= going.username %></a>
   <% }) %>
 </section>
 
-<% if (locals.isAuthenticated ) { %>
+<% if (locals.isAuthenticated && game.createdBy.id !== currentUser.id ) { %>
   <section>
     <form method="POST" action="/games/<%= game.id %>/comments">
       <textarea name="content" id="content" placeholder="Ask any questions here"></textarea>
@@ -42,8 +50,19 @@
 <section>
   <h4>Previous Questions</h4>
   <% game.comments.forEach((comment) => { %>
-    <p><%= comment.content %></p>
-    <small><%= comment.createdBy.username %></small>
+    <p><%= comment.content %> - <small><%= comment.createdBy.username %></small></p
+    <% if(comment.reply) { %>
+      <p><%= comment.reply %> - <small><%= game.createdBy.username %></small></p>
+    <% } %>
+
+
+    <% if (locals.isAuthenticated && game.createdBy.id === currentUser.id && !comment.ownedBy(currentUser) ) { %>
+        <form method="POST" action="/games/<%= game.id %>/comments/<%= comment.id %>">
+          <input type="hidden" name="_method" value="PUT">
+          <textarea name="reply" id="reply" placeholder="Reply to <%= comment.createdBy.username %>'s question here"></textarea>
+          <button class="btn btn-primary">Reply</button>
+        </form>
+    <% } %>
 
     <% if (locals.isAuthenticated && comment.ownedBy(currentUser)) { %>
 

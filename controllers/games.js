@@ -10,6 +10,12 @@ function indexRoute(req, res, next) {
 }
 
 function newRoute(req, res) {
+
+  if(!req.user.address.postcode){
+    req.flash('danger', 'Please update your address if you would like to host a game');
+    return res.redirect(`/users/${req.user.id}/edit`);
+  }
+
   return res.render('games/new');
 }
 
@@ -29,7 +35,7 @@ function createRoute(req, res, next) {
 function showRoute(req, res, next) {
   Game
     .findById(req.params.id)
-    .populate('comments.createdBy going')
+    .populate('comments.createdBy going createdBy')
     .exec()
     .then((game) => {
       if(!game) return res.notFound();
@@ -73,7 +79,6 @@ function deleteRoute(req, res, next) {
     .findById(req.params.id)
     .exec()
     .then((game) => {
-      if(!game) return res.notFound();
       return game.remove();
     })
     .then(() => res.redirect('/games'))
@@ -88,12 +93,10 @@ function createCommentRoute(req, res, next) {
     .findById(req.params.id)
     .exec()
     .then((game) => {
-      if(!game) return res.notFound();
-
       game.comments.push(req.body);
       return game.save();
     })
-    .then((game) => res.redirect(`/games/${game.id}`))
+    .then(() => res.redirect(`/games/${req.params.id}`))
     .catch(next);
 }
 
@@ -102,10 +105,24 @@ function deleteCommentRoute(req, res, next) {
   .findById(req.params.id)
   .exec()
   .then((game) => {
-    if(!game) return res.notFound();
-    // get the embedded record by it's id
+
     const comment = game.comments.id(req.params.commentId);
     comment.remove();
+
+    return game.save();
+  })
+  .then((game) => res.redirect(`/games/${game.id}`))
+  .catch(next);
+}
+
+function replyCommentRoute(req, res, next) {
+  Game
+  .findById(req.params.id)
+  .exec()
+  .then((game) => {
+
+    const comment = game.comments.id(req.params.commentId);
+    comment.reply = req.body.reply;
 
     return game.save();
   })
@@ -143,5 +160,6 @@ module.exports = {
   delete: deleteRoute,
   createComment: createCommentRoute,
   deleteComment: deleteCommentRoute,
-  going: createGoingRoute
+  going: createGoingRoute,
+  reply: replyCommentRoute
 };

@@ -9,11 +9,13 @@ const upload = require('../lib/upload');
 
 router.get('/', (req, res) => res.render('statics/index'));
 
-router.route('/users')
-  .get(users.index);
-
 router.route('/users/:id')
-  .get(users.show);
+  .get(users.show)
+  .delete(users.delete);
+
+router.route('/users/:id/edit')
+  .get(users.edit)
+  .post(users.update);
 
 router.route('/games')
   .get(games.index)
@@ -27,13 +29,17 @@ router.route('/games/:id')
   .put(games.update)
   .delete(secureRoute, games.deleteComment);
 
+router.route('/games/:id/delete')
+  .delete(games.delete);
+
 router.route('/games/:id/attend')
   .post(games.going);
 
-router.route('/games/:id/commments')
+router.route('/games/:id/comments')
   .post(games.createComment);
 
 router.route('/games/:id/comments/:commentId')
+  .put(games.reply)
   .delete(games.deleteComment);
 
 router.route('/register')

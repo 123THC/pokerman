@@ -1,8 +1,12 @@
 @import "bootstrap/bootstrap-grid";
 
+body {
+  list-style-type: none;
+}
+
 #homePage {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/images/poker.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/poker.jpg');
   background-position: center;
   background-size: cover;
   position: relative;
@@ -30,7 +34,6 @@
 .showMap {
   width: 300px;
   margin-right: 5%;
-  display: inline;
 }
 
 .attend {
@@ -38,4 +41,19 @@
   height: 50px;
   border: 2px solid #000;
   margin: 10px;
+}
+
+.profileDisplay {
+  border: 2px solid black;
+  padding: 5px;
+  margin: 10px;
+}
+
+.form-group label.error {
+  color: red;
+  padding: 2px;
+}
+
+.btn-info, .btn-danger{
+  margin: 5px;
 }
