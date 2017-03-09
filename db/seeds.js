@@ -12,7 +12,7 @@ Game.collection.drop();
 
 User
   .create([{
-    username: 'bencurrie',
+    username: 'Bencurrie',
     email: 'ben.w.currie@gmail.com',
     address: {
       line1: '101 South Norwood Hill',
@@ -27,7 +27,7 @@ User
     password: 'password',
     passwordConfirmation: 'password'
   }, {
-    username: 'pokerking1985',
+    username: 'PokerKing1985',
     email: 'a@a',
     address: {
       line1: '15 Mallard Crescent',

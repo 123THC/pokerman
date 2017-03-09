@@ -4,7 +4,7 @@ const s3 = require('../lib/s3');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, unique: true, lowercase: true },
+  username: { type: String, unique: true },
   email: { type: String },
   address: {
     line1: { type: String},

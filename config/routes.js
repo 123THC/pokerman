@@ -10,37 +10,37 @@ const upload = require('../lib/upload');
 router.get('/', (req, res) => res.render('statics/index'));
 
 router.route('/users/:id')
-  .get(users.show)
-  .delete(users.delete);
+  .get(secureRoute, users.show)
+  .delete(secureRoute, users.delete);
 
 router.route('/users/:id/edit')
-  .get(users.edit)
-  .post(users.update);
+  .get(secureRoute, users.edit)
+  .post(secureRoute, users.update);
 
 router.route('/games')
-  .get(games.index)
-  .post(games.create);
+  .get(secureRoute, games.index)
+  .post(secureRoute, games.create);
 
 router.route('/games/new')
-  .get(games.new);
+  .get(secureRoute, games.new);
 
 router.route('/games/:id')
-  .get(games.show)
-  .put(games.update)
+  .get(secureRoute, games.show)
+  .put(secureRoute, games.update)
   .delete(secureRoute, games.deleteComment);
 
 router.route('/games/:id/delete')
-  .delete(games.delete);
+  .delete(secureRoute, games.delete);
 
 router.route('/games/:id/attend')
-  .post(games.going);
+  .post(secureRoute, games.going);
 
 router.route('/games/:id/comments')
-  .post(games.createComment);
+  .post(secureRoute, games.createComment);
 
 router.route('/games/:id/comments/:commentId')
-  .put(games.reply)
-  .delete(games.deleteComment);
+  .put(secureRoute, games.reply)
+  .delete(secureRoute, games.deleteComment);
 
 router.route('/register')
   .get(registrations.new)
