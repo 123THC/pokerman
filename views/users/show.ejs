@@ -1,35 +1,50 @@
 <div>
-  <img src="<%= user.imageSRC %>" alt="<%= user.username %>">
+  <img class="profilePic" src="<%= user.imageSRC %>" alt="<%= user.username %>">
   <h1><%= user.username %></h1>
 
-  <% if( currentUser.id === user.id) { %>
-    <a href="/users/<%= user.id %>/edit" class="btn btn-primary">Edit Account</a>
-  <% } %>
+        <% if( currentUser.id === user.id) { %>
+          <a href="/users/<%= user.id %>/edit" class="btn btn-primary">Edit Account</a>
+        <% } %>
 
-  <h2>Attending</h2>
+        <% if( currentUser.id === user.id) { %>
+          <form  class="deleteForm" method="POST" action="/users/<%= user.id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn btn-danger">Delete Account</button>
+          </form>
+        <% } %>
+
+
   <% games.forEach((game) => { %>
-    <div class="profileDisplay"><a href="/games/<%= game.id %>"<p>Buy In: £<%= game.buyIn %></p>
-    <p>Description: <%= game.description %></p>
-    <p>On: <%= game.date %> at: <%= game.time %></p>
-    <section id="location">
-      <div class="indexMap profileDisplay" data-id="<%= game.id %>" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
-    </section></a></div>
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">Attending</h3>
+        <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
+        <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
+        <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
+        <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
+        <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
+        <a href="/games/<%= game.id %>" class="btn btn-primary">View Game</a>
+      </div>
+    </div>
+  </div>
   <% }) %>
+  <% games.forEach((game) => { %>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-block">
+          <h3 class="card-title">Hosting</h3>
+          <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
+          <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
+          <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
+          <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
+          <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
+          <a href="/games/<%= game.id %>" class="btn btn-primary">View My Game</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% }) %>
 
-  <h2>Hosting</h2>
-  <% hosting.forEach((game) => { %>
-    <div class="profileDisplay"><a href="/games/<%= game.id %>"<p>Buy In: £<%= game.buyIn %></p>
-    <p>Description: <%= game.description %></p>
-    <p>On: <%= game.date %> at: <%= game.time %></p>
-    <section id="location">
-      <div class="indexMap profileDisplay" data-id="<%= game.id %>" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
-    </section></a></div>
-  <% }) %>
-
-  <% if( currentUser.id === user.id) { %>
-  <form method="POST" action="/users/<%= user.id %>">
-    <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-danger">Delete Account</button>
-  </form>
-  <% } %>
 </div>

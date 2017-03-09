@@ -12,7 +12,7 @@ Game.collection.drop();
 
 User
   .create([{
-    username: 'Bencurrie',
+    username: 'bencurrie',
     email: 'ben.w.currie@gmail.com',
     address: {
       line1: '101 South Norwood Hill',
@@ -27,7 +27,7 @@ User
     password: 'password',
     passwordConfirmation: 'password'
   }, {
-    username: 'PokerKing1985',
+    username: 'pokerking1985',
     email: 'a@a',
     address: {
       line1: '15 Mallard Crescent',
@@ -52,7 +52,7 @@ User
         time: '18:00',
         latitude: 51.403634,
         longitude: -0.081172,
-        description: 'This is a high stakes game so lots of beers will be provided and my wife will be providing table service',
+        description: 'This is a high stakes game so lots of beers will be provided and there will be a selection of snacks available. This is Texas Hold \'em and there will only be one chance to buy back in. The blinds will raise every 30 minutes, but we can discuss to what level before we begin',
         createdBy: users[0]
       }, {
         buyIn: 20,
@@ -61,7 +61,7 @@ User
         time: '20:00',
         latitude: 53.348997,
         longitude: -2.143133,
-        description: 'Lots of cheese strings will be provided, please bring your own drinks',
+        description: 'I will be providing red wine and I have a spanish tapas selection that I need to use by this weekend so we can tuck in to that as well',
         createdBy: users[1]
       }]);
   })

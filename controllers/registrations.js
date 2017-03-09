@@ -6,6 +6,7 @@ function newRoute(req, res) {
 }
 
 function createRoute(req, res, next) {
+
   if(req.file) req.body.image = req.file.key;
 
   return rp({

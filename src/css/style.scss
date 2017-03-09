@@ -4,6 +4,10 @@ body {
   list-style-type: none;
 }
 
+body.gamespage {
+  background-color: #2daf3f;
+}
+
 body.homepage {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/poker.jpg');
   background-position: center;
@@ -15,7 +19,7 @@ body.homepage {
     h1 {
       font-size: 50px;
       position: absolute;
-      top: 45%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
       color: $white;
@@ -34,15 +38,8 @@ body.homepage {
   margin-right: 5%;
 }
 
-.showInfo {
-
-}
-
 .showMap {
-  width: 300px;
-  margin-right: 5%;
-  float: right;
-  display: inline-block;
+  width: 60%;
 }
 
 .attend {
@@ -69,4 +66,72 @@ body.homepage {
 
 h2 {
   margin: 10px;
+}
+
+.profilePic {
+  border-radius: 50%;
+  height: 200px;
+  border-style: dotted;
+  margin: 10px;
+}
+
+.profilePicNav {
+  border-radius: 50%;
+  height: 50px;
+  border-style: solid;
+}
+
+.ask, .reply {
+  display: block;
+}
+
+nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      float: right;
+      margin-left: 20px;
+      line-height: 40px;
+      &:last-of-type {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+h5 {
+  margin-left: 20%;
+}
+
+.top {
+  margin-top: 25px;
+}
+
+.topMap {
+  margin-top: 60px;
+}
+
+.card {
+  text-align: center;
+}
+
+.deleteForm {
+  display: inline-block;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+textarea#reply {
+  width: 200px;
 }
