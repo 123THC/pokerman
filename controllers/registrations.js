@@ -45,8 +45,18 @@ function deleteRoute(req, res, next) {
     .catch(next);
 }
 
+// GET /register/checkUsername?username=mickyginger
+// for jQuery validate plugin remote rule: https://jqueryvalidation.org/remote-method/
+function checkUsernameRoute(req, res, next) {
+  User
+    .findOne({ username: req.query.username })
+    .then((user) => res.json(!user)) // return a JSON boolean true if username has not been used already
+    .catch(next);
+}
+
 module.exports = {
   new: newRoute,
   create: createRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  checkUsername: checkUsernameRoute
 };

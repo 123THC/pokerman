@@ -46,6 +46,9 @@ router.route('/register')
   .get(registrations.new)
   .post(upload.single('image'), registrations.create);
 
+router.route('/register/checkUsername')
+  .get(registrations.checkUsername);
+
 router.route('/login')
   .get(sessions.new)
   .post(sessions.create);

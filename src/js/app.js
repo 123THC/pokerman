@@ -2,6 +2,23 @@
 
 $(()=>{
 
+  $('form').validate({
+    rules: {
+      username: {
+        required: true,
+        remote: {
+          url: '/register/checkUsername',
+          type: 'GET'
+        }
+      }
+    },
+    messages: {
+      username: {
+        remote: 'That username is already taken'
+      }
+    }
+  });
+
   if ($('#map').length) initSingleMap();
 
   function initSingleMap() {

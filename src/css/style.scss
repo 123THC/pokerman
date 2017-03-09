@@ -4,20 +4,23 @@ body {
   list-style-type: none;
 }
 
-#homePage {
-  height: 100vh;
+body.homepage {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/poker.jpg');
   background-position: center;
   background-size: cover;
   position: relative;
-  h1 {
-   font-size: 50px;
-   position: absolute;
-   top: 45%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   color: $white;
- }
+  section {
+    height: 100vh;
+
+    h1 {
+      font-size: 50px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $white;
+    }
+  }
 }
 
 #map {
@@ -31,9 +34,15 @@ body {
   margin-right: 5%;
 }
 
+.showInfo {
+
+}
+
 .showMap {
   width: 300px;
   margin-right: 5%;
+  float: right;
+  display: inline-block;
 }
 
 .attend {
@@ -56,4 +65,8 @@ body {
 
 .btn-info, .btn-danger{
   margin: 5px;
+}
+
+h2 {
+  margin: 10px;
 }

@@ -54,6 +54,10 @@ app.use(flash());
 app.use(customResponses);
 app.use(authentication);
 
+app.use((req, res, next) => {
+  res.locals.bodyClass = req.path.split('/')[1] || 'homepage';
+  next();
+});
 // set up our routes - just before our error handler
 app.use(routes);
 

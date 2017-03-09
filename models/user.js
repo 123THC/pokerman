@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const s3 = require('../lib/s3');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
-  username: {type: String, unique: true},
-  email: {type: String},
+  username: { type: String, unique: true, lowercase: true },
+  email: { type: String },
   address: {
     line1: { type: String},
     line2: { type: String },
@@ -18,6 +19,8 @@ const userSchema = new mongoose.Schema({
   password: {type: String }, // the required is a validation
   githubId: { type: Number }
 });
+
+userSchema.plugin(uniqueValidator);
 
 userSchema
   .virtual('imageSRC')

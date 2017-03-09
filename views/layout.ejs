@@ -6,14 +6,14 @@
     <title>Poker Man</title>
     <% include ./partials/stylesheets %>
   </head>
-  <body>
+  <body class="<%= bodyClass %>">
     <% include ./partials/navbar %>
     <% for(const type in messages) { %>
       <div class="<%= type %>">
         <h5><%= messages[type] %></h5>
       </div>
     <% } %>
-    <main>
+    <main class="container">
       <%- body %>
       <% include ./partials/scripts %>
     </main>
