@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   lat: { type: Number },
   lng: { type: Number },
   image: { type: String },
-  password: {type: String }, // the required is a validation
+  password: {type: String },
   githubId: { type: Number }
 });
 
