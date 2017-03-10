@@ -21,6 +21,21 @@ $(()=>{
 
   if ($('#map').length) initSingleMap();
 
+  const $autocomplete = $('.autocomplete');
+
+  if($autocomplete.length) {
+    const autocomplete = new google.maps.places.Autocomplete($autocomplete[0]);
+    autocomplete.addListener('place_changed', () => {
+      const latLng = autocomplete.getPlace().geometry.location.toJSON();
+      const address = $autocomplete.val().split(', ');
+      $('[name="address[line1]"]').val(address[0]);
+      $('[name="address[city]"]').val(address[1]);
+      $('[name="address[country]"]').val(address[2]);
+      $('[name=lat]').val(latLng.lat);
+      $('[name=lng]').val(latLng.lng);
+    });
+  }
+
   function initSingleMap() {
     const lat = $('#map').data('lat');
     const lng = $('#map').data('lng');

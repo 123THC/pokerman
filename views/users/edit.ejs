@@ -7,6 +7,12 @@
 
       <fieldset>
           <legend>Address</legend>
+          <input type="hidden" name="lat">
+          <input type="hidden" name="lng">
+          <div class="form-group">
+            <label for="address-lookup">Address Lookup</label>
+            <input type="text" id="address-lookup" class="form-control autocomplete">
+          </div>
           <div class=class="form-group">
             <label for="line1">Line 1</label>
             <input type="text" name="address[line1]" id="line1" value="<%= user.address.line1 %>" class="form-control" required>

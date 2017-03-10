@@ -8,6 +8,12 @@ body.gamespage {
   background-color: #2daf3f;
 }
 
+.github {
+  margin-top: 10px;
+  width: 150px;
+  height: auto;
+}
+
 body.homepage {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/poker.jpg');
   background-position: center;
@@ -95,9 +101,6 @@ nav {
       float: right;
       margin-left: 20px;
       line-height: 40px;
-      &:last-of-type {
-        margin-left: 0;
-      }
     }
   }
 }

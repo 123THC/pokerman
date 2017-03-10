@@ -23,6 +23,21 @@ $(function () {
 
   if ($('#map').length) initSingleMap();
 
+  var $autocomplete = $('.autocomplete');
+
+  if ($autocomplete.length) {
+    var autocomplete = new google.maps.places.Autocomplete($autocomplete[0]);
+    autocomplete.addListener('place_changed', function () {
+      var latLng = autocomplete.getPlace().geometry.location.toJSON();
+      var address = $autocomplete.val().split(', ');
+      $('[name="address[line1]"]').val(address[0]);
+      $('[name="address[city]"]').val(address[1]);
+      $('[name="address[country]"]').val(address[2]);
+      $('[name=lat]').val(latLng.lat);
+      $('[name=lng]').val(latLng.lng);
+    });
+  }
+
   function initSingleMap() {
     var lat = $('#map').data('lat');
     var lng = $('#map').data('lng');

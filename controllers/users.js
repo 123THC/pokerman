@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const Game = require('../models/game');
 const Promise = require('bluebird');
-const rp = require('request-promise');
 
 function indexRoute(req, res, next) {
   User
@@ -40,21 +39,7 @@ function editRoute(req, res, next) {
 
 function updateRoute(req, res, next) {
 
-  return rp({
-    method: 'GET',
-    url: 'https://maps.googleapis.com/maps/api/geocode/json',
-    qs: {
-      address: req.body.address.postcode,
-      key: process.env.GEOCODING_KEY
-    },
-    json: true
-  })
-  .then((response) => {
-
-    req.body.lat = response.results[0].geometry.location.lat;
-    req.body.lng = response.results[0].geometry.location.lng;
-
-    User
+  User
     .findById(req.params.id)
     .exec()
     .then((user) => {
@@ -73,7 +58,6 @@ function updateRoute(req, res, next) {
       if(err.name === 'ValidationError') return res.badRequest(`/users/${req.params.id}/edit`, err.toString());
       next(err);
     });
-  });
 }
 
 function deleteRoute(req, res, next) {
