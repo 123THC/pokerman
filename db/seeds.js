@@ -62,7 +62,7 @@ User
         latitude: 53.348997,
         longitude: -2.143133,
         description: 'I will be providing red wine and I have a spanish tapas selection that I need to use by this weekend so we can tuck in to that as well',
-        createdBy: users[1]
+        createdBy: users[0]
       }]);
   })
   .then((games) => {
