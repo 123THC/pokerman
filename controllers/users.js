@@ -22,6 +22,7 @@ function showRoute(req, res, next) {
     hosting: Game.find({ createdBy: req.user.id }).exec()
   })
   .then((result) => {
+    console.log(result);
     return res.render('users/show', result);
   })
   .catch(next);

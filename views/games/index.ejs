@@ -3,7 +3,7 @@
 <% games.forEach((game) => { %>
   <div class="row">
     <div class="col-md-8">
-      <a href="games/<%= game.id %>"<p><strong>Hosted By: </strong><%= game.createdBy %></p>
+      <a href="games/<%= game.id %>"<p><strong>Hosted By: </strong><%= game.createdBy.username %></p>
       <p><strong>Buy in:</strong>£<%= game.buyIn %></p>
       <p><strong>Number of Players:</strong><%= game.players %></p>
       <p><strong>Seats remaining:</strong><%= game.seatsRemaining() %></p>
