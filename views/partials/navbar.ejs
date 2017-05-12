@@ -1,13 +1,12 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-md">
   <div class="container">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapse" aria-controls="collapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse" aria-controls="collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="/">Poker Man</a>
-
-  <% if(locals.isAuthenticated) { %>
     <div class="collapse navbar-collapse" id="collapse">
       <ul class="navbar-nav mr-auto">
+        <% if(locals.isAuthenticated) { %>
         <li class="nav-item">
           <a class="nav-link" href="/games">Current Games</a>
         </li>
