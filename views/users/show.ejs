@@ -8,13 +8,13 @@
     <h3 class="bottomAddress"><%= user.address.city %></h3>
 
     <% if( currentUser.id === user.id) { %>
-        <a href="/users/<%= user.id %>/edit" class="btn loginBtn">Edit Account</a>
+        <a href="/users/<%= user.id %>/edit" class="btn mainBtn">Edit Account</a>
     <% } %>
 
     <% if( currentUser.id === user.id) { %>
         <form  class="deleteForm" method="POST" action="/users/<%= user.id %>">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="btn loginBtn">Delete Account</button>
+          <button class="btn deleteButton">Delete Account</button>
         </form>
     <% } %>
   </div>
@@ -26,12 +26,12 @@
       <div class="card">
         <div class="card-block">
           <h1 class="card-title">Attending</h1>
-          <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
-          <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
-          <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
-          <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
-          <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
-          <a href="/games/<%= game.id %>" class="btn loginBtn">View Game</a>
+          <p class="card-text"><img class="infoImage" src="../assets/images/money.png" alt="buy-in"><strong>Buy in:</strong> £<%= game.buyIn %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/players.png" alt="players"><strong>Number of Players:</strong> <%= game.players %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/seats.png" alt="seats remaining"><strong>Seats remaining:</strong> <%= game.seatsRemaining() %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/calendar.png" alt="calendar"><strong>When:</strong> <%= game.date.toDateString() %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/clock.png" alt="clock"><strong>Time:</strong> <%= game.time %></p><hr>
+          <a href="/games/<%= game.id %>" class="btn mainBtn">View Game</a>
         </div>
       </div>
     </div>
@@ -41,12 +41,12 @@
       <div class="card">
         <div class="card-block">
           <h1 class="card-title">Hosting</h1>
-          <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
-          <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
-          <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
-          <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
-          <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
-          <a href="/games/<%= game.id %>" class="btn loginBtn">View My Game</a>
+          <p class="card-text"><img class="infoImage" src="../assets/images/money.png" alt="buy-in"><strong>Buy in:</strong> £<%= game.buyIn %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/players.png" alt="players"><strong>Number of Players:</strong> <%= game.players %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/seats.png" alt="seats remaining"><strong>Seats remaining:</strong> <%= game.seatsRemaining() %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/calendar.png" alt="calendar"><strong>When:</strong> <%= game.date.toDateString() %></p><hr>
+          <p class="card-text"><img class="infoImage" src="../assets/images/clock.png" alt="clock"><strong>Time:</strong> <%= game.time %></p><hr>
+          <a href="/games/<%= game.id %>" class="btn mainBtn">View My Game</a>
         </div>
       </div>
     </div>

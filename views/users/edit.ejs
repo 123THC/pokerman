@@ -1,40 +1,39 @@
-<div>
-  <h1>Hi <%= user.username %>, you can edit your details below</h1>
-  <img class="profilePic" src="<%= user.imageSRC %>" alt="<%= user.username %>">
+<div class="row">
+  <div class="loginBox container col-md-8 col-sm-12 usersDetailsEditBox">
+    <% if(user.id === currentUser.id) { %>
+      <form method="POST" action="/users/<%= user.id %>/edit">
 
-  <% if(user.id === currentUser.id) { %>
-    <form method="POST" action="/users/<%= user.id %>/edit">
+        <fieldset>
+            <legend>Address</legend>
+            <input type="hidden" name="lat">
+            <input type="hidden" name="lng">
+            <div class="form-group">
+              <input type="text" id="address-lookup" class="form-control autocomplete">
+            </div>
+            <div class=class="form-group">
+              <label for="line1">Street Name and Number</label>
+              <input type="text" name="address[line1]" id="line1" value="<%= user.address.line1 %>" class="form-control" required>
+            </div>
+            <div>
+              <label for="line2">Line 2</label>
+              <input type="text" name="address[line2]" id="line2" value="<%= user.address.line2 %>" class="form-control" required>
+            </div>
+            <div>
+              <label for="city">City</label>
+              <input type="text" name="address[city]" id="city" value="<%= user.address.city %>" class="form-control" required>
+            </div>
+            <div>
+              <label for="postcode">Postcode</label>
+              <input type="text" name="address[postcode]" id="postcode" value="<%= user.address.postcode %>" class="form-control" required>
+            </div>
+            <div>
+              <label for="country">Country</label>
+              <input type="text" name="address[country]" id="country" value="<%= user.address.country %>" class="form-control" required>
+            </div>
+          </fieldset>
 
-      <fieldset>
-          <legend>Address</legend>
-          <input type="hidden" name="lat">
-          <input type="hidden" name="lng">
-          <div class="form-group">
-            <label for="address-lookup">Address Lookup</label>
-            <input type="text" id="address-lookup" class="form-control autocomplete">
-          </div>
-          <div class=class="form-group">
-            <label for="line1">Line 1</label>
-            <input type="text" name="address[line1]" id="line1" value="<%= user.address.line1 %>" class="form-control" required>
-          </div>
-          <div>
-            <label for="line2">Line 2</label>
-            <input type="text" name="address[line2]" id="line2" value="<%= user.address.line2 %>" class="form-control" required>
-          </div>
-          <div>
-            <label for="city">City</label>
-            <input type="text" name="address[city]" id="city" value="<%= user.address.city %>" class="form-control" required>
-          </div>
-          <div>
-            <label for="postcode">Postcode</label>
-            <input type="text" name="address[postcode]" id="postcode" value="<%= user.address.postcode %>" class="form-control" required>
-          </div>
-          <div>
-            <label for="country">Country</label>
-            <input type="text" name="address[country]" id="country" value="<%= user.address.country %>" class="form-control" required>
-          </div>
-        </fieldset>
-
-      <button class="btn btn-primary">Update Details</button>
-    </form>
-  <% } %>
+        <button class="btn mainBtn usersEditBtn">Update Details</button>
+      </form>
+    <% } %>
+  </div>
+</div>
