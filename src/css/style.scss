@@ -19,9 +19,11 @@ body.homepage {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/images/poker.jpg');
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
   section {
     height: 100vh;
+    width: 100vw;
     img {
       position: absolute;
       top: 60%;
@@ -29,6 +31,13 @@ body.homepage {
       transform: translate(-50%, -50%);
     }
   }
+}
+
+// come back to this as not woring in chrome dev tools right now
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
 }
 
 #map {
@@ -149,7 +158,8 @@ textarea#reply {
 }
 
 .loginBtn {
-  background-color: crimson;
+  background-color: #002366;
+  color: lightseagreen;
 }
 
 nav {
