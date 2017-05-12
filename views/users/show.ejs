@@ -1,16 +1,23 @@
-<div>
-  <img class="profilePic" src="<%= user.imageSRC %>" alt="<%= user.username %>">
-  <h1><%= user.username %></h1>
-  <% if( currentUser.id === user.id) { %>
-      <a href="/users/<%= user.id %>/edit" class="btn btn-primary">Edit Account</a>
-  <% } %>
+<div class="row profileTopBox">
+  <div class="col-md-6 col-sm-12">
+    <img class="profilePic" src="<%= user.imageSRC %>" alt="<%= user.username %>">
+    <h1 class="profileUsername"><%= user.username %></h1>
+  </div>
+  <div class="col-md-6 col-sm-12 userDetailsBox">
+    <h3><%= user.address.line2 %></h3>
+    <h3 class="bottomAddress"><%= user.address.city %></h3>
 
-  <% if( currentUser.id === user.id) { %>
-      <form  class="deleteForm" method="POST" action="/users/<%= user.id %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn btn-danger">Delete Account</button>
-      </form>
-  <% } %>
+    <% if( currentUser.id === user.id) { %>
+        <a href="/users/<%= user.id %>/edit" class="btn loginBtn">Edit Account</a>
+    <% } %>
+
+    <% if( currentUser.id === user.id) { %>
+        <form  class="deleteForm" method="POST" action="/users/<%= user.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="btn loginBtn">Delete Account</button>
+        </form>
+    <% } %>
+  </div>
 </div>
 
 <% games.forEach((game) => { %>
@@ -18,13 +25,13 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-block">
-          <h3 class="card-title">Attending</h3>
+          <h1 class="card-title">Attending</h1>
           <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
           <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
           <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
           <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
           <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
-          <a href="/games/<%= game.id %>" class="btn btn-primary">View Game</a>
+          <a href="/games/<%= game.id %>" class="btn loginBtn">View Game</a>
         </div>
       </div>
     </div>
@@ -33,13 +40,13 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-block">
-          <h3 class="card-title">Hosting</h3>
+          <h1 class="card-title">Hosting</h1>
           <p class="card-text"><strong>Buy in:</strong> £<%= game.buyIn %></p>
           <p class="card-text"><strong>Number of Players: </strong><%= game.players %></p>
           <p class="card-text"><strong>Seats remaining: </strong><%= game.seatsRemaining() %></p>
           <p class="card-text"><strong>When:</strong> <%= game.date.toDateString() %></p>
           <p class="card-text"><strong>Time:</strong> <%= game.time %></p>
-          <a href="/games/<%= game.id %>" class="btn btn-primary">View My Game</a>
+          <a href="/games/<%= game.id %>" class="btn loginBtn">View My Game</a>
         </div>
       </div>
     </div>

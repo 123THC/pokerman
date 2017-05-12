@@ -2,6 +2,7 @@
 
 body {
   list-style-type: none;
+  background-color: #D3D3D3;
 }
 
 body.gamespage {
@@ -38,6 +39,9 @@ body.homepage {
   and (min-device-width: 414px)
   and (max-device-width: 736px)
   and (-webkit-min-device-pixel-ratio: 3) {
+    .navbar-nav .nav-link {
+      width: 30vw;
+    }
 }
 
 #map {
@@ -112,7 +116,9 @@ nav {
 }
 
 h5 {
-  margin-left: 20%;
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .top {
@@ -160,6 +166,14 @@ textarea#reply {
 .loginBtn {
   background-color: #002366;
   color: lightseagreen;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    &:hover {
+      color: blue;
+    }
 }
 
 nav {
@@ -177,4 +191,35 @@ button.navbar-toggler {
   background-image: url('../assets/images/pokerchips.png');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.profileUsername {
+
+}
+
+.profileTopBox {
+  margin: 60px 15px 30px 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  h1 {
+    font-family: 'Anton', sans-serif;
+  }
+}
+
+.userDetailsBox {
+  padding-top: 10%;
+}
+
+.card {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-bottom: 30px;
+  background-color: lightseagreen;
+  box-shadow: 0px 2px 2px 0px;
+  h1 {
+    font-family: 'Anton', sans-serif;
+  }
+}
+
+.bottomAddress {
+  margin-bottom: 25px;
 }
