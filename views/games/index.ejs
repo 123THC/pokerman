@@ -1,17 +1,14 @@
-<h1>Games currently available</h1>
-
 <% games.forEach((game) => { %>
-  <div class="row">
+  <div class="row gameIndexBox">
     <div class="col-md-8">
-      <a href="games/<%= game.id %>"<p><strong>Hosted By: </strong><%= game.createdBy.username %></p>
-      <p><strong>Buy in:</strong>£<%= game.buyIn %></p>
-      <p><strong>Number of Players:</strong><%= game.players %></p>
-      <p><strong>Seats remaining:</strong><%= game.seatsRemaining() %></p>
-      <p><strong>When:</strong><%= game.date.toDateString() %></p>
-      <p><strong>Time:</strong><%= game.time %></p>
-      <hr>
+      <a href="games/<%= game.id %>">
+      <p class="card-text"><img class="infoImage" src="../assets/images/money.png" alt="buy-in"><strong>Buy in:</strong> £<%= game.buyIn %></p><hr class="gameIndex-hr">
+      <p class="card-text"><img class="infoImage" src="../assets/images/players.png" alt="players"><strong>Number of Players:</strong> <%= game.players %></p><hr class="gameIndex-hr">
+      <p class="card-text"><img class="infoImage" src="../assets/images/seats.png" alt="seats remaining"><strong>Seats remaining:</strong> <%= game.seatsRemaining() %></p><hr class="gameIndex-hr">
+      <p class="card-text"><img class="infoImage" src="../assets/images/calendar.png" alt="calendar"><strong>When:</strong> <%= game.date.toDateString() %></p><hr class="gameIndex-hr">
+      <p class="card-text"><img class="infoImage" src="../assets/images/clock.png" alt="clock"><strong>Time:</strong> <%= game.time %></p></a>
     </div>
-    <section id="location" class="col-md-4">
+    <section id="location" class="col-md-4 gameMapIndex">
       <div class="indexMap" data-id="<%= game.id %>" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div></a>
     </section>
   </div>

@@ -5,6 +5,8 @@ body {
   background-color: #D3D3D3;
 }
 
+// homepage
+
 body.gamespage {
   background-color: #2daf3f;
 }
@@ -47,6 +49,8 @@ body.homepage {
     }
 }
 
+// map styles
+
 #map {
   height: 300px;
 }
@@ -58,8 +62,58 @@ body.homepage {
   margin-right: 5%;
 }
 
+.gameMapIndex {
+  margin-top: 25px;
+}
+
 .showMap {
   width: 60%;
+  height: 100%;
+}
+
+.topMap {
+  margin-top: 20px;
+  margin-right: 10px;
+  box-shadow: 0px 2px 2px 0px;
+}
+
+.gameDelete {
+  width: auto;
+  margin-left: 30%;
+}
+
+// divs for the game show page
+
+.top {
+  margin-top: 5%;
+}
+
+.bottom {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.hostedByGameShow {
+  text-align: center;
+}
+
+// question box on game show page
+
+.questionBox {
+  height: 100px;
+  width: 400px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+.ask, .reply {
+  display: block;
+  margin-left: 36%;
+}
+
+.gameIndex-hr {
+  background-color: lightseagreen;
 }
 
 .attend {
@@ -100,10 +154,6 @@ h2 {
   border-style: solid;
 }
 
-.ask, .reply {
-  display: block;
-}
-
 nav {
   ul {
     list-style: none;
@@ -125,14 +175,6 @@ h5 {
   text-align: center;
   margin-top: 10px;
   font-family: 'Roboto Condensed', sans-serif;
-}
-
-.top {
-  margin-top: 25px;
-}
-
-.topMap {
-  margin-top: 60px;
 }
 
 .card {
@@ -262,4 +304,8 @@ button.navbar-toggler {
   label {
     padding-top: 10px;
   }
+}
+
+.gameIndexBox {
+  margin-top: 50px;
 }

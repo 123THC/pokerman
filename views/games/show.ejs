@@ -3,18 +3,18 @@
     <div id="map" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
   </section>
   <section class="col-md-4 col-sm-12">
-    <img class="profilePic" src="<%= game.createdBy.image %>" alt="Profile picture">
-    <strong><p>Buy in:</strong> £<%= game.buyIn %></p>
-    <strong><p>Number of Players:</strong> <%= game.players %></p>
-    <strong><p>When:</strong> <%= game.date.toDateString() %></p>
-    <strong><p>Seats Remaining:</strong> <%= game.seatsRemaining() %></p>
-    <strong><p>More Info:</strong> <%= game.description %></p>
+    <p><img class="infoImage" src="../assets/images/money.png" alt="buy-in"><strong>Buy in:</strong> £<%= game.buyIn %></p><hr class="gameIndex-hr">
+    <p><img class="infoImage" src="../assets/images/players.png" alt="players"><strong>Number of Players:</strong> <%= game.players %></p><hr class="gameIndex-hr">
+    <p><img class="infoImage" src="../assets/images/seats.png" alt="seats remaining"><strong>Seats remaining:</strong> <%= game.seatsRemaining() %></p><hr class="gameIndex-hr">
+    <p><img class="infoImage" src="../assets/images/calendar.png" alt="calendar"><strong>When:</strong> <%= game.date.toDateString() %></p><hr class="gameIndex-hr">
+    <p><img class="infoImage" src="../assets/images/clock.png" alt="clock"><strong>Time:</strong> <%= game.time %></p><hr class="gameIndex-hr">
+    <p class="hostedByGameShow"><a href="/users/<%= game.createdBy.id %>"><strong><%= game.createdBy.username %></strong></a></p><hr class="gameIndex-hr">
 
     <% if (game.createdBy.id === currentUser.id) { %>
       <form method="POST" action="/games/<%= game.id %>/delete">
         <input type="hidden" name="_method" value="DELETE">
         <div class="row">
-        <button class="btn btn-danger col-md-12">Delete Game</button>
+        <button class="btn deleteButton gameDelete">Delete Game</button>
         </div>
       </form>
     <% } %>
@@ -30,18 +30,8 @@
   </section>
 </div>
 
-<div class="row">
-  <section class="col-md-8 col-sm-12">
-
-    <% if (locals.isAuthenticated && game.createdBy.id !== currentUser.id ) { %>
-      <section>
-        <form method="POST" action="/games/<%= game.id %>/comments">
-          <textarea name="content" id="content" placeholder="Ask any questions here"></textarea>
-          <button class="btn btn-primary ask">Ask a Question</button>
-        </form>
-      </section>
-    <% } %>
-
+<div class="row bottom">
+  <section class="col-md-6 col-sm-12">
     <h4>Previous Questions</h4>
     <% game.comments.forEach((comment) => { %>
       <p><%= comment.content %> - <small><%= comment.createdBy.username %></small></p>
@@ -62,15 +52,24 @@
 
         <form method="POST" action="/games/<%= game.id %>/comments/<%= comment.id %>">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="btn btn-danger">Delete Comment</button>
+          <button class="btn deleteButton">Delete Comment</button>
         </form>
       <% } %>
     <% }) %>
+
+    <% if (locals.isAuthenticated && game.createdBy.id !== currentUser.id ) { %>
+      <section>
+        <form method="POST" action="/games/<%= game.id %>/comments">
+          <textarea class="questionBox" name="content" id="content" placeholder="Ask any questions here..."></textarea>
+          <button class="btn mainBtn ask">Ask a Question</button>
+        </form>
+      </section>
+    <% } %>
   </section>
-  <section class="col-md-4 col-sm-12">
+  <section class="col-md-6 col-sm-12">
     <h4>Already Attending</h4>
     <% game.going.forEach((going) => { %>
-      <a class="btn btn-info" href="/users/<%= going.id %>"><%= going.username %></a>
+      <a class="btn mainBtn" href="/users/<%= going.id %>"><%= going.username %></a>
     <% }) %>
   </section>
 </div>
