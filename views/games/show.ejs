@@ -1,6 +1,6 @@
 <div class="row top">
-  <section class="showMap topMap" id="location" class="col-md-8 col-sm-12">
-    <div id="map" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
+  <section id="location" class="col-md-8 col-sm-12">
+    <div class="topMap" id="map" data-lat=<%= game.latitude %> data-lng=<%= game.longitude %>></div>
   </section>
   <section class="col-md-4 col-sm-12">
     <p><img class="infoImage" src="../assets/images/money.png" alt="buy-in"><strong>Buy in:</strong> £<%= game.buyIn %></p><hr class="gameIndex-hr">
@@ -28,6 +28,12 @@
       </form>
     <% } %>
   </section>
+</div>
+
+<div class="row">
+  <div class="col-md-12 gameDescription">
+    <p><%= game.description %></p>
+  </div>
 </div>
 
 <div class="row bottom">
