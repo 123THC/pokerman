@@ -14,7 +14,7 @@
       <form method="POST" action="/games/<%= game.id %>/delete">
         <input type="hidden" name="_method" value="DELETE">
         <div class="row">
-        <button class="btn deleteButton gameDelete">Delete Game</button>
+        <button class="btn deleteButton gameDeleteOrAttend">Delete Game</button>
         </div>
       </form>
     <% } %>
@@ -23,7 +23,7 @@
       <form method="POST" action="/games/<%= game.id %>/attend">
         <input type="hidden" name="_method" value="<%= currentUser.username %>">
         <div class="row container">
-        <button class="btn btn-success attend col-md-12">Attend</button>
+        <button class="btn mainBtn gameDeleteOrAttend">Attend</button>
         </div>
       </form>
     <% } %>
